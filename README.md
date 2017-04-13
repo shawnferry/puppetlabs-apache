@@ -1296,7 +1296,7 @@ If the string starts with / or | or syslog: the full path will be set. Otherwise
 
 ##### `scriptalias`
 
-Directory to use for global script alias 
+Directory to use for global script alias
 
 The default value is determined by your operating system:
 
@@ -2393,7 +2393,7 @@ If using fastcgi, this option sets the timeout for the server to respond.
 ##### `file_e_tag`
 
 Sets the server default for the [`FileETag`][] declaration, which modifies the response header field for static files.
-Valid options: 'INode', 'MTime', 'Size', 'All', 'None'. 
+Valid options: 'INode', 'MTime', 'Size', 'All', 'None'.
 Default: undef, which uses Apache's default setting of 'MTime Size'.
 
 ##### `filters`
