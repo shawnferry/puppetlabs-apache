@@ -108,7 +108,7 @@ define apache::mpm (
     'gentoo': {
       # so we don't fail
     }
-    'redhat': {
+    'redhat', 'solaris': {
       # so we don't fail
     }
     'Suse': {

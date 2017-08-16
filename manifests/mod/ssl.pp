@@ -44,6 +44,15 @@ class apache::mod::ssl (
       'gentoo': {
         $_ssl_mutex = 'default'
       }
+      'Solaris': {
+        if versioncmp($_apache_version, '2.4') == 0 {
+          $_ssl_mutex = 'default'
+        } elsif versioncmp($_apache_version, '2.2') == 0 {
+          $_ssl_mutex = 'file:/var/run/apache2/2.2/ssl_mutex'
+        } else {
+          $_ssl_mutex = 'file:/var/run/ssl_mutex'
+        }
+      }
       'Suse': {
         $_ssl_mutex = 'default'
       }
@@ -61,6 +70,12 @@ class apache::mod::ssl (
       'off'   => false,
       default => true,
     }
+  }
+
+  validate_bool($ssl_stapling)
+
+  if $ssl_stapling_return_errors != undef {
+    validate_bool($ssl_stapling_return_errors)
   }
 
   $stapling_cache = $::osfamily ? {

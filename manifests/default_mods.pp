@@ -28,6 +28,10 @@ class apache::default_mods (
     'Suse': {
       ::apache::mod { 'log_config': }
     }
+    'solaris': {
+      ::apache::mod { 'log_config': }
+      ::apache::mod { 'unixd': }
+    }
     default: {}
   }
   case $::osfamily {

@@ -62,7 +62,7 @@ class apache::mod::prefork (
         }
       }
     }
-    'debian', 'freebsd': {
+    'debian', 'freebsd', 'solaris': {
       ::apache::mpm{ 'prefork':
         apache_version => $_apache_version,
       }
