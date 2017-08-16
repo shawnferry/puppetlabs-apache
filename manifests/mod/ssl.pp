@@ -40,6 +40,15 @@ class apache::mod::ssl (
       'gentoo': {
         $_ssl_mutex = 'default'
       }
+      'solaris': {
+        if versioncmp($apache_version, '2.4') == 0 {
+          $ssl_mutex = 'default'
+        } elsif versioncmp($apache_version, '2.2') == 0 {
+          $ssl_mutex = 'file:/var/run/apache2/2.2/ssl_mutex'
+        } else {
+          $ssl_mutex = "file:/var/run/ssl_mutex"
+        }
+      }
       'Suse': {
         $_ssl_mutex = 'default'
       }
@@ -66,7 +75,16 @@ class apache::mod::ssl (
     'redhat'  => '/var/cache/mod_ssl/scache(512000)',
     'freebsd' => '/var/run/ssl_scache(512000)',
     'gentoo'  => '/var/run/ssl_scache(512000)',
-    'Suse'    => '/var/lib/apache2/ssl_scache(512000)'
+    'Suse'    => '/var/lib/apache2/ssl_scache(512000)',
+    'solaris': {
+      if versioncmp($apache_version, '2.4') == 0 {
+        $session_cache = '/var/run/apache2/2.4/ssl_scache(512000)'
+      } elsif versioncmp($apache_version, '2.2') == 0 {
+        $session_cache = '/var/run/apache2/2.2/ssl_scache(512000)'
+      } else {
+        $session_cache = '/var/run/ssl_scache(512000)'
+      }
+     }
   }
 
   validate_bool($ssl_stapling)
